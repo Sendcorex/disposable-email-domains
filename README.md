@@ -24,23 +24,27 @@ Sign up and generate your free API key here:
 ### cURL
 
 ```bash
-curl -X GET "https://api.sendcorex.com/v1/disposable/check?email=test@mailinator.com" \
-  -H "Authorization: Bearer YOUR_API_KEY"
+curl -X POST \
+  https://graph.sendcorex.com/v4/mail/isdisposable \
+  -H 'Authorization: API_KEY' \
+  -d '{"email":"user@mailinator.com"}'
 ```
 
 ### Node.js
 
 ```javascript
-const response = await fetch(
-  "https://api.sendcorex.com/v1/disposable/check?email=test@mailinator.com",
-  {
-    headers: { Authorization: "Bearer YOUR_API_KEY" }
-  }
-);
+const response = await fetch("https://graph.sendcorex.com/v4/mail/isdisposable", {
+  method: "POST",
+  headers: {
+    "Authorization": "API_KEY",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({ email: "user@mailinator.com" })
+});
 
 const data = await response.json();
 console.log(data);
-// { email: "test@mailinator.com", disposable: true, domain: "mailinator.com" }
+// { email: "user@mailinator.com", disposable: true, domain: "mailinator.com" }
 ```
 
 ### Python
@@ -48,23 +52,26 @@ console.log(data);
 ```python
 import requests
 
-response = requests.get(
-    "https://api.sendcorex.com/v1/disposable/check",
-    params={"email": "test@mailinator.com"},
-    headers={"Authorization": "Bearer YOUR_API_KEY"}
+response = requests.post(
+    "https://graph.sendcorex.com/v4/mail/isdisposable",
+    json={"email": "user@mailinator.com"},
+    headers={"Authorization": "API_KEY"}
 )
 
 print(response.json())
-# {"email": "test@mailinator.com", "disposable": true, "domain": "mailinator.com"}
+# {"email": "user@mailinator.com", "disposable": true, "domain": "mailinator.com"}
 ```
 
 ### PHP
 
 ```php
-$ch = curl_init("https://api.sendcorex.com/v1/disposable/check?email=test@mailinator.com");
+$ch = curl_init("https://graph.sendcorex.com/v4/mail/isdisposable");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(["email" => "user@mailinator.com"]));
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    "Authorization: Bearer YOUR_API_KEY"
+    "Authorization: API_KEY",
+    "Content-Type: application/json"
 ]);
 
 $response = curl_exec($ch);
@@ -77,7 +84,7 @@ print_r(json_decode($response, true));
 
 ```json
 {
-  "email": "test@mailinator.com",
+  "email": "user@mailinator.com",
   "domain": "mailinator.com",
   "disposable": true
 }
