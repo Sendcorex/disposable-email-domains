@@ -44,7 +44,7 @@ const response = await fetch("https://graph.sendcorex.com/v4/mail/isdisposable",
 
 const data = await response.json();
 console.log(data);
-// { email: "user@mailinator.com", disposable: true, domain: "mailinator.com" }
+// { email: "user@mailinator.com", blocked: true, domain: "mailinator.com" }
 ```
 
 ### Python
@@ -59,7 +59,7 @@ response = requests.post(
 )
 
 print(response.json())
-# {"email": "user@mailinator.com", "disposable": true, "domain": "mailinator.com"}
+# {"email": "user@mailinator.com", "blocked": true, "domain": "mailinator.com"}
 ```
 
 ### PHP
