@@ -86,7 +86,7 @@ print_r(json_decode($response, true));
 {
   "email": "user@mailinator.com",
   "domain": "mailinator.com",
-  "disposable": true
+  "blocked": true
 }
 ```
 
